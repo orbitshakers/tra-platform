@@ -1,0 +1,93 @@
+//pplication {
+//	config {
+//	baseName traweb,
+//    	applicationType microservice,
+//        packageName org.orbitshakers.traweb,
+//        databaseType sql,
+//        devDatabaseType mysql,
+//    	prodDatabaseType mysql,
+//    	buildTool maven,
+//        clientFramework angularX,
+//        useSass true,
+//        clientPackageManager npm,
+//        nativeLanguage en,
+//        languages [en, spa],
+//        serverPort 8089
+//    }
+//}
+entity Domain {
+	name String required,
+    desc String,
+    sortOrder Integer required
+}
+
+entity Concept {
+	name String required,
+    desc String,
+    sortOrder Integer required   
+}
+
+entity DomainOption {
+	name String required,
+    weight Double required    
+}
+
+entity DomainQuestion {
+	text String required,
+    sortOrder Integer required
+}
+
+entity UseCase {
+	name String required,    
+}
+
+entity UseCaseOption {
+	option String required,
+    sortOrder Integer required
+}
+
+entity TraSession {
+    start Instant required,
+    end Instant,
+    completed Boolean,
+    score Double
+}
+entity TraSessionAnswer 
+
+entity TraFeedback {
+	desc String required,
+    feedbackMin Integer required,
+    feedbackMax Integer required,
+    sortOrder Integer required
+}
+
+entity TraSessionFeedback {
+	providedFeedback Integer
+}
+relationship OneToOne {
+	TraSessionAnswer{domainQuestion} to DomainQuestion,
+    TraSessionAnswer{selectedOption} to DomainOption,
+    TraSessionFeedback{traFeedback} to TraFeedback
+}
+relationship OneToMany {
+	Domain{concept} to Concept{domain},
+    UseCase{useCaseOption} to UseCaseOption{useCase},
+    TraSession{traSessionFeedback} to TraSessionFeedback,
+    Domain{domainOption} to DomainOption{domain},
+	Domain{domainQuestion} to DomainQuestion{domain},
+    Concept to DomainQuestion{concept},
+    TraSession{traSessionAnswer} to TraSessionAnswer
+}
+
+// Set pagination options
+//paginate JobHistory, Employee with infinite-scroll
+//paginate Job with pagination
+
+// Use Data Transfert Objects (DTO)
+dto * with mapstruct
+
+// Set service options to all except few
+//service all with serviceImpl except Employee, Job
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
