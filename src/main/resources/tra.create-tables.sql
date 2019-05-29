@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `question_type` (
 
 CREATE TABLE IF NOT EXISTS `question` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
+  `name` varchar(100) DEFAULT NULL,
   `title` varchar(200) DEFAULT NULL,
   `question_type_id` int(11) NOT NULL,
   `multi_answer` tinyint(1) NOT NULL DEFAULT '0',
@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `traoption` (
   `name` varchar(100) NOT NULL,
   `point` int(11) NOT NULL,
   `sort_order` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
