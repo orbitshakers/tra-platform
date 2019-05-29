@@ -7,6 +7,7 @@ import org.orbitshakers.tra.domain.Domain;
 import org.orbitshakers.tra.service.TraService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,10 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/")
 public class TraController {
 
+	
     private final TraService traService;
 
     private final static Logger logger = LoggerFactory.getLogger(TraController.class);
 
+    @Autowired
     public TraController(TraService traService) {
 
 	this.traService = traService;

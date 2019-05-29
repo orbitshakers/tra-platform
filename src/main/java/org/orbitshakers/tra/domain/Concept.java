@@ -7,11 +7,20 @@ import lombok.Setter;
 import lombok.ToString;
 
 @ToString @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-public class Domain {
-
+public class Concept {
+//	id
+//	name
+//	explanation
+//	instruction
+//	unnamed
+//	weight_perc
+//	sort_order
+	
 	private Long id;
 	private String name;
+	private String explanation;
 	private String instruction;
+	private boolean unnamed;
 	private Double weight;
 	private Integer sortOrder;
 }

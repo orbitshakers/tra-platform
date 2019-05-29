@@ -25,7 +25,7 @@ INSERT INTO `concept` (`id`, `name`, `explanation`, `instruction`, `unnamed`, `w
 
 INSERT INTO `domain` (`id`, `name`, `instruction`, `weight_perc`, `sort_order`) VALUES
 (1, 'Core Readiness', NULL, '20.00', 1),
-(2, 'Financial Considerations', '', '15.00', 2),
+(2, 'Financial Considerations', NULL, '15.00', 2),
 (3, 'Operations', NULL, '40.00', 3),
 (4, 'Staff Engagement', NULL, '15.00', 4),
 (5, 'Patient Readiness', NULL, '10.00', 5);

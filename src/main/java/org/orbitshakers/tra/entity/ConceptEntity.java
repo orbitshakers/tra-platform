@@ -14,9 +14,17 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "domain")
+@Table(name = "concept")
 @ToString @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-public class DomainEntity {
+public class ConceptEntity {
+
+//	id
+//	name
+//	explanation
+//	instruction
+//	unnamed
+//	weight_perc
+//	sort_order
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
@@ -26,9 +34,15 @@ public class DomainEntity {
 	@Column(name = "name")
 	private String name;
 
+	@Column(name = "explanation")
+	private String explanation;
+	
 	@Column(name = "instruction")
 	private String instruction;
 
+	@Column(name = "unnamed")
+	private boolean unnamed;
+	
 	@Column(name = "weight_perc")
 	private Double weight;
 	
