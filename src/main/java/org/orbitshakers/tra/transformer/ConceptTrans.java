@@ -28,7 +28,7 @@ public class ConceptTrans implements Transformer<ConceptEntity, Concept>{
     			new ConceptEntity(resource.getId(), resource.getName(), resource.getExplanation(),
     					resource.getInstruction(), resource.isUnnamed(), resource.getWeight(), resource.getSortOrder(),
     					resource.getTraOptions().stream().map(traOptionTransformer::extract).collect(Collectors.toList()),
-    							resource.getQuestions().stream().map(questionTransformer::extract).collect(Collectors.toList())
+    					resource.getQuestions().stream().map(questionTransformer::extract).collect(Collectors.toList())
     					);
     	return entity;
     }

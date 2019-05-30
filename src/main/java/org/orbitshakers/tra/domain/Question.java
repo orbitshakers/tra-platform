@@ -1,5 +1,7 @@
 package org.orbitshakers.tra.domain;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,4 +29,5 @@ public class Question {
 	private String instruction;
 	private String text;
 	private Integer sortOrder;
+	private List<TraOption> traOptions;
 }

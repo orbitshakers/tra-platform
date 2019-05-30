@@ -4,6 +4,7 @@ package org.orbitshakers.tra.controller;
 import java.util.List;
 
 import org.orbitshakers.tra.domain.Domain;
+import org.orbitshakers.tra.domain.Questionnaire;
 import org.orbitshakers.tra.service.TraService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +34,13 @@ public class TraController {
 	logger.info("Get all available domains");
 
 		return ResponseEntity.ok(traService.findAllDomains());
+    }
+    
+    @GetMapping("/questionnaire")
+    public ResponseEntity<Questionnaire> getQuestionnaire() {
+	logger.info("Get questionnaire");
+
+		return ResponseEntity.ok(traService.getQuestionnaire());
     }
 
 }
