@@ -20,10 +20,14 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "domain")
+@Table(name = "traoption")
 @ToString @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-public class DomainEntity {
-
+public class TraOptionEntity {
+//	id
+//	name
+//	point
+//	sort_order
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	@Column(name = "id")
@@ -32,20 +36,11 @@ public class DomainEntity {
 	@Column(name = "name")
 	private String name;
 
-	@Column(name = "instruction")
-	private String instruction;
-
-	@Column(name = "weight_perc")
-	private Double weight;
+	@Column(name = "point")
+	private Integer point;
 	
 	@Column(name = "sort_order")
 	private Integer sortOrder;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(
-			name = "domain_concept",
-			joinColumns = @JoinColumn(name = "domain_id"),
-			inverseJoinColumns = @JoinColumn(name = "concept_id")
-			)
-	private List<ConceptEntity> concepts;
+
 }

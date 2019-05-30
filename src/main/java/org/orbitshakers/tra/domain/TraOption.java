@@ -1,7 +1,5 @@
 package org.orbitshakers.tra.domain;
 
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,13 +7,14 @@ import lombok.Setter;
 import lombok.ToString;
 
 @ToString @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-public class Domain {
+public class TraOption {
+//	id
+//	name
+//	point
+//	sort_order
 
 	private Long id;
 	private String name;
-	private String instruction;
-	private Double weight;
+	private Integer point;
 	private Integer sortOrder;
-	
-	private List<Concept> concepts;
 }

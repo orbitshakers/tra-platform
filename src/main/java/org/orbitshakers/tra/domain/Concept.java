@@ -1,5 +1,7 @@
 package org.orbitshakers.tra.domain;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,4 +25,8 @@ public class Concept {
 	private boolean unnamed;
 	private Double weight;
 	private Integer sortOrder;
+	
+	private List<TraOption> traOptions;
+	private List<Question> questions;	
+	
 }

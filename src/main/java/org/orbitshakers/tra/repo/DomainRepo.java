@@ -7,5 +7,5 @@ import org.orbitshakers.tra.entity.DomainEntity;
 public interface DomainRepo extends ReadOnlyRepo<DomainEntity, Long> {
     public List<DomainEntity> findAll();
     
-    public List<DomainEntity> findAllByOrderByIdDesc();  
+    public List<DomainEntity> findAllByOrderBySortOrderAsc();  
 }
