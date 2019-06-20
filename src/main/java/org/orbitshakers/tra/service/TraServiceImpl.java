@@ -1,20 +1,27 @@
 package org.orbitshakers.tra.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.orbitshakers.tra.domain.Domain;
 import org.orbitshakers.tra.domain.Question;
 import org.orbitshakers.tra.domain.Questionnaire;
+import org.orbitshakers.tra.domain.TraSession;
 import org.orbitshakers.tra.entity.ConceptEntity;
 import org.orbitshakers.tra.entity.DomainEntity;
 import org.orbitshakers.tra.entity.QuestionEntity;
+import org.orbitshakers.tra.entity.TraSessionEntity;
 import org.orbitshakers.tra.repo.ConceptRepo;
 import org.orbitshakers.tra.repo.DomainRepo;
 import org.orbitshakers.tra.repo.QuestionRepo;
+import org.orbitshakers.tra.repo.TraSessionRepo;
 import org.orbitshakers.tra.transformer.DomainTrans;
 import org.orbitshakers.tra.transformer.QuestionTrans;
+import org.orbitshakers.tra.transformer.TraSessionTrans;
 import org.orbitshakers.tra.transformer.Transformer;
+import org.orbitshakers.tra.util.RandomGenerator;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,16 +29,23 @@ public class TraServiceImpl implements TraService{
 
 	private Transformer<DomainEntity, Domain> domainTransformer = new DomainTrans();
 	private Transformer<QuestionEntity, Question> questionTransformer = new QuestionTrans();
+	private Transformer<TraSessionEntity, TraSession> traSessionTransformer = new TraSessionTrans();
 	
 	private final DomainRepo repo;
 	private final ConceptRepo conceptRepo;
 	private final QuestionRepo questionRepo;
+	private final TraSessionRepo traSessionRepo;
 
-	public TraServiceImpl(DomainRepo repo, ConceptRepo conceptRepo, QuestionRepo questionRepo) {
+	@Value( "${sessionid.length:20}" )
+	private  Integer sessionIdLength;
+	
+	public TraServiceImpl(DomainRepo repo, ConceptRepo conceptRepo, QuestionRepo questionRepo, TraSessionRepo traSessionRepo) {
 
 		this.repo = repo;
 		this.conceptRepo = conceptRepo;
 		this.questionRepo = questionRepo;
+		this.traSessionRepo = traSessionRepo;
+		
 	}
 
 	public Questionnaire getQuestionnaire() {
@@ -78,5 +92,18 @@ public class TraServiceImpl implements TraService{
 				.collect(Collectors.toList());
 	}
 		
+	public TraSession createTraSession() {
+		System.out.println("id length: " + this.sessionIdLength.intValue());
+		String sessionId = RandomGenerator.getAlphaNumeric(this.sessionIdLength.intValue());
+		TraSessionEntity traSessionEntity = new TraSessionEntity();
+		traSessionEntity.setSessionId(sessionId);
+		traSessionEntity.setStartTime(new Date());
+		traSessionEntity.setLastUpdateTime(traSessionEntity.getStartTime());
+		
+		TraSessionEntity result = traSessionRepo.saveAndFlush(traSessionEntity);
+		
+		return this.traSessionTransformer.transform(result);
+		
+	}
 
 }

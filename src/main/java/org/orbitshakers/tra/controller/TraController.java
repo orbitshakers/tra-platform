@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.orbitshakers.tra.domain.Domain;
 import org.orbitshakers.tra.domain.Questionnaire;
+import org.orbitshakers.tra.domain.TraSession;
 import org.orbitshakers.tra.service.TraService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,4 +44,13 @@ public class TraController {
 		return ResponseEntity.ok(traService.getQuestionnaire());
     }
 
+
+    @GetMapping("/start")
+    public ResponseEntity<TraSession> start() {
+	logger.info("Start");
+
+		return ResponseEntity.ok(traService.createTraSession());
+    }
+    
+    
 }

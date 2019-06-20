@@ -149,9 +149,10 @@ CREATE TABLE IF NOT EXISTS `question_traoption` (
 CREATE TABLE IF NOT EXISTS `trasession` (
   `session_id` varchar(100) NOT NULL,
   `start_time` datetime NOT NULL,
-  `end_time` datetime NOT NULL,
-  `completed` tinyint(1) NOT NULL,
-  `selected_for_feedback` tinyint(1) NOT NULL,
+  `end_time` datetime DEFAULT NULL,
+  `last_update_time` datetime NOT NULL,
+  `completed` tinyint(1) DEFAULT NULL,
+  `selected_for_feedback` tinyint(1) DEFAULT NULL,
   `score` decimal(5,2) DEFAULT NULL,
   PRIMARY KEY (`session_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

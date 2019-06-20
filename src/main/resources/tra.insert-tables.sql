@@ -4,19 +4,19 @@
 --
 
 INSERT INTO `concept` (`id`, `name`, `explanation`, `instruction`, `unnamed`, `weight_perc`, `sort_order`) VALUES
-(1, 'Need for Telehealth', 'Consider your practice’s needs with respect to telehealth.', 'Please check one box in each row', 0, '10.00', 1),
-(2, 'Organizational Leadership Buy-In', 'Consider whether your practice has support and direction from leadership.', 'Please check one box in each row', 0, '10.00', 2),
-(3, '3-unnamed', 'Consider the financial implications of telehealth, including costs and reimbursement, for your practice.', 'Please check one box in each row', 1, '15.00', 1),
-(4, 'Telehealth Roles', 'Consider the roles and responsibilities needed for telehealth.', 'Please check one box in each row', 0, '5.00', 1),
-(5, 'Scheduling and Workflows', 'Consider how your practice will schedule telehealth visits and what the associated workflow will be for the visits.', 'Please check one box in each row', 0, '10.00', 2),
-(6, 'Operational Requirements', 'Consider the operational requirements for telehealth for your practice.', 'Please check one box in each row', 0, '5.00', 3),
-(7, 'Assessment Approach', 'Consider how your practice will monitor and assess implementation/outcomes.', 'Please check one box in each row', 0, '5.00', 4),
-(8, 'Technology', 'Consider the technical infrastructure needed for telehealth in your practice.', 'Please check one box in each row', 0, '10.00', 5),
-(9, 'Physical Space', 'Consider what facilities are needed for telehealth in your practice.', 'Please check one box in each row', 0, '5.00', 6),
-(10, 'Education and Awareness', 'Consider how to increase awareness and engagement among staff.', 'Please check one box in each row', 0, '7.50', 1),
-(11, 'Innovators/Champions', 'Consider who at your practice will support telehealth.', 'Please check one box in each row', 0, '7.50', 2),
-(12, 'Patient Engagement', 'Consider how your practice will engage patients in telehealth services.', 'Please check one box in each row', 0, '5.00', 1),
-(13, 'Health Literacy', 'What is your patient population’s capacity to obtain, process and understand basic health information needed to make appropriate health decisions?', 'Please check one box in each row', 0, '5.00', 2);
+(1, 'Need for Telehealth', 'Consider your practice’s needs with respect to telehealth.', 'Please select one circle in each row', 0, '10.00', 1),
+(2, 'Organizational Leadership Buy-In', 'Consider whether your practice has support and direction from leadership.', 'Please select one circle in each row', 0, '10.00', 2),
+(3, '3-unnamed', 'Consider the financial implications of telehealth, including costs and reimbursement, for your practice.', 'Please select one circle in each row', 1, '15.00', 1),
+(4, 'Telehealth Roles', 'Consider the roles and responsibilities needed for telehealth.', 'Please select one circle in each row', 0, '5.00', 1),
+(5, 'Scheduling and Workflows', 'Consider how your practice will schedule telehealth visits and what the associated workflow will be for the visits.', 'Please select one circle in each row', 0, '10.00', 2),
+(6, 'Operational Requirements', 'Consider the operational requirements for telehealth for your practice.', 'Please select one circle in each row', 0, '5.00', 3),
+(7, 'Assessment Approach', 'Consider how your practice will monitor and assess implementation/outcomes.', 'Please select one circle in each row', 0, '5.00', 4),
+(8, 'Technology', 'Consider the technical infrastructure needed for telehealth in your practice.', 'Please select one circle in each row', 0, '10.00', 5),
+(9, 'Physical Space', 'Consider what facilities are needed for telehealth in your practice.', 'Please select one circle in each row', 0, '5.00', 6),
+(10, 'Education and Awareness', 'Consider how to increase awareness and engagement among staff.', 'Please select one circle in each row', 0, '7.50', 1),
+(11, 'Innovators/Champions', 'Consider who at your practice will support telehealth.', 'Please select one circle in each row', 0, '7.50', 2),
+(12, 'Patient Engagement', 'Consider how your practice will engage patients in telehealth services.', 'Please select one circle in each row', 0, '5.00', 1),
+(13, 'Health Literacy', 'What is your patient population’s capacity to obtain, process and understand basic health information needed to make appropriate health decisions?', 'Please select one circle in each row', 0, '5.00', 2);
 
 -- --------------------------------------------------------
 --
