@@ -32,14 +32,14 @@ public class TraController {
 
     @GetMapping("/domains")
     public ResponseEntity<List<Domain>> getAllDomains() {
-	logger.info("Get all available domains");
+    	logger.info("Get all available domains");
 
 		return ResponseEntity.ok(traService.findAllDomains());
     }
     
     @GetMapping("/questionnaire")
     public ResponseEntity<Questionnaire> getQuestionnaire() {
-	logger.info("Get questionnaire");
+    	logger.info("Get questionnaire");
 
 		return ResponseEntity.ok(traService.getQuestionnaire());
     }
@@ -47,8 +47,13 @@ public class TraController {
 
     @GetMapping("/start")
     public ResponseEntity<TraSession> start() {
-	logger.info("Start");
-
+    	logger.info("Start");
+//    	try {
+//    		Thread.sleep(3000);
+//    	}
+//    	catch (InterruptedException e) {
+//		  
+//    	}
 		return ResponseEntity.ok(traService.createTraSession());
     }
     

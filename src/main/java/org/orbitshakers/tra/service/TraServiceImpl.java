@@ -2,6 +2,7 @@ package org.orbitshakers.tra.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 import org.orbitshakers.tra.domain.Domain;
@@ -39,6 +40,10 @@ public class TraServiceImpl implements TraService{
 	@Value( "${sessionid.length:20}" )
 	private  Integer sessionIdLength;
 	
+	
+	@Value( "${feedback.probabilityPossibleOutcomes:5}" )
+	private Integer feedbackProbabilityPossibleOutcomes;
+			
 	public TraServiceImpl(DomainRepo repo, ConceptRepo conceptRepo, QuestionRepo questionRepo, TraSessionRepo traSessionRepo) {
 
 		this.repo = repo;
@@ -93,12 +98,18 @@ public class TraServiceImpl implements TraService{
 	}
 		
 	public TraSession createTraSession() {
-		System.out.println("id length: " + this.sessionIdLength.intValue());
+		System.out.println("id length: " + this.sessionIdLength.intValue() + " feedback base: " +
+				this.feedbackProbabilityPossibleOutcomes.intValue() );
+		
 		String sessionId = RandomGenerator.getAlphaNumeric(this.sessionIdLength.intValue());
 		TraSessionEntity traSessionEntity = new TraSessionEntity();
 		traSessionEntity.setSessionId(sessionId);
 		traSessionEntity.setStartTime(new Date());
 		traSessionEntity.setLastUpdateTime(traSessionEntity.getStartTime());
+		
+		Random rand = new Random();
+		boolean selectedForFeedback = rand.nextInt(this.feedbackProbabilityPossibleOutcomes)==0;
+		traSessionEntity.setSelectedForFeedback(selectedForFeedback);
 		
 		TraSessionEntity result = traSessionRepo.saveAndFlush(traSessionEntity);
 		
