@@ -1,16 +1,15 @@
 package org.orbitshakers.tra.entity;
 
 import java.util.Date;
-import java.util.List;
+import java.util.HashMap;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.orbitshakers.tra.domain.TraAnswer;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -50,11 +49,11 @@ score
 	@Column(name = "selected_for_feedback")
 	private boolean selectedForFeedback;
 
-	
-
 	@Column(name = "score")
 	private Double score;
 
+	@Transient
+	private HashMap<String, TraAnswer> traAnswers;
 /*
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(

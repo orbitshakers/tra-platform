@@ -17,4 +17,6 @@ public interface TraService {
 	
 	public TraSession createTraSession();
 	
+	public TraSession saveTraSession(TraSession traSession);
+	
 }

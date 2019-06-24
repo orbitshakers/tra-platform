@@ -29,7 +29,7 @@ public class TraSessionTrans implements Transformer<TraSessionEntity, TraSession
  */
     	
         return new TraSession(entity.getSessionId(), entity.getStartTime(), entity.getEndTime(),
-        		entity.getLastUpdateTime(), entity.isCompleted(), entity.isSelectedForFeedback(), entity.getScore()
+        		entity.getLastUpdateTime(), entity.isCompleted(), entity.isSelectedForFeedback(), entity.getScore(), null
 //entity.getTraOptions().stream().map(traOptionTransformer::transform).collect(Collectors.toList()),
 //entity.getQuestions().stream().map(questionTransformer::transform).collect(Collectors.toList())
         		);
@@ -39,7 +39,7 @@ public class TraSessionTrans implements Transformer<TraSessionEntity, TraSession
     public TraSessionEntity extract(TraSession resource){
     	TraSessionEntity entity = 
     			new TraSessionEntity(resource.getSessionId(), resource.getStartTime(), resource.getEndTime(),
-    					resource.getLastUpdateTime(), resource.isCompleted(), resource.isSelectedForFeedback(), resource.getScore()
+    					resource.getLastUpdateTime(), resource.isCompleted(), resource.isSelectedForFeedback(), resource.getScore(), null
 //    					resource.getTraOptions().stream().map(traOptionTransformer::extract).collect(Collectors.toList()),
 //    					resource.getQuestions().stream().map(questionTransformer::extract).collect(Collectors.toList())
     					);

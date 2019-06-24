@@ -1,5 +1,6 @@
 package org.orbitshakers.tra.service;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -8,6 +9,8 @@ import java.util.stream.Collectors;
 import org.orbitshakers.tra.domain.Domain;
 import org.orbitshakers.tra.domain.Question;
 import org.orbitshakers.tra.domain.Questionnaire;
+import org.orbitshakers.tra.domain.TraAnswer;
+import org.orbitshakers.tra.domain.TraOption;
 import org.orbitshakers.tra.domain.TraSession;
 import org.orbitshakers.tra.entity.ConceptEntity;
 import org.orbitshakers.tra.entity.DomainEntity;
@@ -24,6 +27,7 @@ import org.orbitshakers.tra.transformer.Transformer;
 import org.orbitshakers.tra.util.RandomGenerator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class TraServiceImpl implements TraService{
@@ -98,8 +102,8 @@ public class TraServiceImpl implements TraService{
 	}
 		
 	public TraSession createTraSession() {
-		System.out.println("id length: " + this.sessionIdLength.intValue() + " feedback base: " +
-				this.feedbackProbabilityPossibleOutcomes.intValue() );
+//		System.out.println("id length: " + this.sessionIdLength.intValue() + " feedback base: " +
+//				this.feedbackProbabilityPossibleOutcomes.intValue() );
 		
 		String sessionId = RandomGenerator.getAlphaNumeric(this.sessionIdLength.intValue());
 		TraSessionEntity traSessionEntity = new TraSessionEntity();
@@ -116,5 +120,23 @@ public class TraServiceImpl implements TraService{
 		return this.traSessionTransformer.transform(result);
 		
 	}
+	
+	@Transactional
+	public TraSession saveTraSession(TraSession traSession) {
+		
+		traSessionRepo.deleteSessionAnswers(traSession.getSessionId());
+		
+		Collection<TraAnswer> allTheAnswers = traSession.getTraAnswers().values();
+		for (TraAnswer answer: allTheAnswers) {
+			TraOption[] selectedOptions = answer.getSelectedOptions();
+			for (TraOption aSelectedOption : selectedOptions) {
+				traSessionRepo.addSelectedOption(traSession.getSessionId(), answer.getQuestion().getId(), aSelectedOption.getId()) ;
+			}
+		}
+		TraSessionEntity result = traSessionRepo.findBySessionId(traSession.getSessionId());
+		
+		return this.traSessionTransformer.transform(result);
+		
+	}	
 
 }

@@ -1,6 +1,7 @@
 package org.orbitshakers.tra.domain;
 
 import java.util.Date;
+import java.util.HashMap;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,4 +19,5 @@ public class TraSession {
 	private boolean completed;
 	private boolean selectedForFeedback;
 	private Double score;
+	private HashMap<String, TraAnswer> traAnswers;
 }

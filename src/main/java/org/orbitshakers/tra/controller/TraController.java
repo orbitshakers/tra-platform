@@ -12,6 +12,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,7 +41,7 @@ public class TraController {
     
     @GetMapping("/questionnaire")
     public ResponseEntity<Questionnaire> getQuestionnaire() {
-    	logger.info("Get questionnaire");
+    	logger.info("getQuestionnaire");
 
 		return ResponseEntity.ok(traService.getQuestionnaire());
     }
@@ -47,7 +49,7 @@ public class TraController {
 
     @GetMapping("/start")
     public ResponseEntity<TraSession> start() {
-    	logger.info("Start");
+    	logger.info("start");
 //    	try {
 //    		Thread.sleep(3000);
 //    	}
@@ -55,6 +57,12 @@ public class TraController {
 //		  
 //    	}
 		return ResponseEntity.ok(traService.createTraSession());
+    }
+    
+    @PostMapping("/save-session-data")
+    public ResponseEntity<TraSession> saveSessionData(@RequestBody TraSession traSession) {
+    	logger.info("saveSessionData");
+		return ResponseEntity.ok(traService.saveTraSession(traSession));
     }
     
     
