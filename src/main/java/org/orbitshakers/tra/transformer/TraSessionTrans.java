@@ -18,20 +18,10 @@ public class TraSessionTrans implements Transformer<TraSessionEntity, TraSession
 	private Transformer<QuestionEntity, Question> questionTransformer = new QuestionTrans();
     @Override
     public TraSession transform(TraSessionEntity entity){
-/*
- * 	private String sessionId;
-	private Date startTime;
-	private Date endTime;
-	private Date lastUpdateTime;
-	private boolean completed;
-	private boolean selectedForFeedback;
-	private Double score;    	
- */
     	
         return new TraSession(entity.getSessionId(), entity.getStartTime(), entity.getEndTime(),
-        		entity.getLastUpdateTime(), entity.isCompleted(), entity.isSelectedForFeedback(), entity.getScore(), null
-//entity.getTraOptions().stream().map(traOptionTransformer::transform).collect(Collectors.toList()),
-//entity.getQuestions().stream().map(questionTransformer::transform).collect(Collectors.toList())
+        		entity.getLastUpdateTime(), entity.isCompleted(), entity.isSelectedForFeedback(), 
+        		entity.getScore(), null, entity.isExpired()
         		);
     }
 
@@ -39,9 +29,9 @@ public class TraSessionTrans implements Transformer<TraSessionEntity, TraSession
     public TraSessionEntity extract(TraSession resource){
     	TraSessionEntity entity = 
     			new TraSessionEntity(resource.getSessionId(), resource.getStartTime(), resource.getEndTime(),
-    					resource.getLastUpdateTime(), resource.isCompleted(), resource.isSelectedForFeedback(), resource.getScore(), null
-//    					resource.getTraOptions().stream().map(traOptionTransformer::extract).collect(Collectors.toList()),
-//    					resource.getQuestions().stream().map(questionTransformer::extract).collect(Collectors.toList())
+    					resource.getLastUpdateTime(), resource.isCompleted(), resource.isSelectedForFeedback(), 
+    					resource.getScore(), null, resource.isExpired()
+
     					);
     	return entity;
     }

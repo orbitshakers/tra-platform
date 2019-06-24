@@ -20,4 +20,6 @@ public class TraSession {
 	private boolean selectedForFeedback;
 	private Double score;
 	private HashMap<String, TraAnswer> traAnswers;
+	
+	private boolean expired;
 }

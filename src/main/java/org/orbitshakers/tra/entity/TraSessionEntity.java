@@ -54,6 +54,9 @@ score
 
 	@Transient
 	private HashMap<String, TraAnswer> traAnswers;
+	
+	@Transient
+	private boolean expired;
 /*
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(
