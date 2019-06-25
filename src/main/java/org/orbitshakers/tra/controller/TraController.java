@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -64,6 +65,12 @@ public class TraController {
     	logger.info("saveSessionData");
 		return ResponseEntity.ok(traService.saveTraSession(traSession));
     }
-    
+
+    @GetMapping("/session-data")
+    public ResponseEntity<TraSession> getSessionData(@RequestParam("id") String sessionId) {
+    	logger.info("sessionData");
+		return ResponseEntity.ok(traService.getTraSession(sessionId));
+    }
+        
     
 }

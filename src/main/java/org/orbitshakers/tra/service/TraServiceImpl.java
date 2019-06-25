@@ -1,5 +1,6 @@
 package org.orbitshakers.tra.service;
 
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -41,13 +42,16 @@ public class TraServiceImpl implements TraService{
 	private final QuestionRepo questionRepo;
 	private final TraSessionRepo traSessionRepo;
 
-	@Value( "${sessionid.length:20}" )
+	@Value( "${session.id.length:20}" )
 	private  Integer sessionIdLength;
-	
 	
 	@Value( "${feedback.probabilityPossibleOutcomes:5}" )
 	private Integer feedbackProbabilityPossibleOutcomes;
-			
+	
+	@Value( "${session.timeout:30}" )
+	private Integer sessionTimeout;
+
+	
 	public TraServiceImpl(DomainRepo repo, ConceptRepo conceptRepo, QuestionRepo questionRepo, TraSessionRepo traSessionRepo) {
 
 		this.repo = repo;
@@ -139,4 +143,24 @@ public class TraServiceImpl implements TraService{
 		
 	}	
 
+
+	public TraSession getTraSession(String sessionId) {
+
+		TraSessionEntity result = traSessionRepo.findBySessionId(sessionId);
+		Calendar lastUpdatePlusTimeout = Calendar.getInstance();
+		
+		if (result != null) {
+			lastUpdatePlusTimeout.setTime(result.getLastUpdateTime());
+			lastUpdatePlusTimeout.add(Calendar.MINUTE, sessionTimeout);
+			if (lastUpdatePlusTimeout.before(Calendar.getInstance()) ) {
+				result.setExpired(true);
+			}
+			else {
+				result.setExpired(false);
+			}
+		}
+		return this.traSessionTransformer.transform(result);
+		
+	}	
+	
 }
