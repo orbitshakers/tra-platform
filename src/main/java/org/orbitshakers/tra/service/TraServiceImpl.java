@@ -1,8 +1,10 @@
 package org.orbitshakers.tra.service;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -132,7 +134,7 @@ public class TraServiceImpl implements TraService{
 		
 		Collection<TraAnswer> allTheAnswers = traSession.getTraAnswers().values();
 		for (TraAnswer answer: allTheAnswers) {
-			TraOption[] selectedOptions = answer.getSelectedOptions();
+			List<TraOption> selectedOptions = answer.getSelectedOptions();
 			for (TraOption aSelectedOption : selectedOptions) {
 				traSessionRepo.addSelectedOption(traSession.getSessionId(), answer.getQuestion().getId(), aSelectedOption.getId()) ;
 			}
@@ -159,7 +161,37 @@ public class TraServiceImpl implements TraService{
 				result.setExpired(false);
 			}
 		}
-		return this.traSessionTransformer.transform(result);
+		
+		TraSession traSession = this.traSessionTransformer.transform(result);
+		
+		
+		List<Object[]> sessionQaResult = traSessionRepo.getSessionQuestionAnswers(sessionId);
+
+		if (sessionQaResult != null && sessionQaResult.size() > 0) {
+			HashMap<String, TraAnswer> qaMap = new HashMap<String, TraAnswer> ();
+		
+			sessionQaResult.stream().forEach((record) -> {
+				Question q = (Question) record[0];
+				TraOption a = (TraOption) record[1];
+
+				TraAnswer currTraAnswer = qaMap.get(q.getId().toString());
+		    
+				if (currTraAnswer == null) {
+					qaMap.put(q.getId().toString(), new TraAnswer());
+					qaMap.get(q.getId().toString()).setQuestion(q);
+					qaMap.get(q.getId().toString()).setSelectedOptions(new ArrayList<TraOption> ());
+					
+					currTraAnswer = qaMap.get(q.getId().toString());
+				}
+				
+				
+				currTraAnswer.getSelectedOptions().add(a);
+
+			});
+			traSession.setTraAnswers(qaMap);
+		
+		}
+		return traSession; 
 		
 	}	
 	

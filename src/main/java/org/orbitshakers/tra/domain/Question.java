@@ -30,4 +30,8 @@ public class Question {
 	private String text;
 	private Integer sortOrder;
 	private List<TraOption> traOptions;
+	
+	public Question (Long id) {
+		this.id = id;
+	}
 }

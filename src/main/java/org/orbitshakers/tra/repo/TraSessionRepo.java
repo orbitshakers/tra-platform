@@ -1,5 +1,7 @@
 package org.orbitshakers.tra.repo;
 
+import java.util.List;
+
 import org.orbitshakers.tra.entity.TraSessionEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -16,4 +18,6 @@ public interface TraSessionRepo extends JpaRepository<TraSessionEntity, Long> {
 	@Modifying
 	@Query(value="INSERT INTO trasess_quest_traop(session_id, question_id, traoption_id) VALUES (?1, ?2, ?3) ", nativeQuery = true)
 	void addSelectedOption(String sessionId, Long questionId, Long traOptionId) ;
+	
+	List<Object[]> getSessionQuestionAnswers(String sessionId);
 }

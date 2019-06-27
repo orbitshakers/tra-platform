@@ -17,4 +17,8 @@ public class TraOption {
 	private String name;
 	private Integer point;
 	private Integer sortOrder;
+	
+	public TraOption (Long id) {
+		this.id = id;
+	}
 }
