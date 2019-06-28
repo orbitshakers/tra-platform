@@ -139,10 +139,8 @@ public class TraServiceImpl implements TraService{
 				traSessionRepo.addSelectedOption(traSession.getSessionId(), answer.getQuestion().getId(), aSelectedOption.getId()) ;
 			}
 		}
-		TraSessionEntity result = traSessionRepo.findBySessionId(traSession.getSessionId());
 		
-		return this.traSessionTransformer.transform(result);
-		
+		return getTraSession(traSession.getSessionId());
 	}	
 
 
