@@ -148,6 +148,7 @@ public class TraServiceImpl implements TraService{
 
 		TraSessionEntity result = traSessionRepo.findBySessionId(sessionId);
 		Calendar lastUpdatePlusTimeout = Calendar.getInstance();
+		TraSession traSession = null;
 		
 		if (result != null) {
 			lastUpdatePlusTimeout.setTime(result.getLastUpdateTime());
@@ -158,37 +159,37 @@ public class TraServiceImpl implements TraService{
 			else {
 				result.setExpired(false);
 			}
-		}
-		
-		TraSession traSession = this.traSessionTransformer.transform(result);
-		
-		
-		List<Object[]> sessionQaResult = traSessionRepo.getSessionQuestionAnswers(sessionId);
+			traSession = this.traSessionTransformer.transform(result);
+			
+			
+			List<Object[]> sessionQaResult = traSessionRepo.getSessionQuestionAnswers(sessionId);
 
-		if (sessionQaResult != null && sessionQaResult.size() > 0) {
-			HashMap<String, TraAnswer> qaMap = new HashMap<String, TraAnswer> ();
-		
-			sessionQaResult.stream().forEach((record) -> {
-				Question q = (Question) record[0];
-				TraOption a = (TraOption) record[1];
+			if (sessionQaResult != null && sessionQaResult.size() > 0) {
+				HashMap<String, TraAnswer> qaMap = new HashMap<String, TraAnswer> ();
+			
+				sessionQaResult.stream().forEach((record) -> {
+					Question q = (Question) record[0];
+					TraOption a = (TraOption) record[1];
 
-				TraAnswer currTraAnswer = qaMap.get(q.getId().toString());
-		    
-				if (currTraAnswer == null) {
-					qaMap.put(q.getId().toString(), new TraAnswer());
-					qaMap.get(q.getId().toString()).setQuestion(q);
-					qaMap.get(q.getId().toString()).setSelectedOptions(new ArrayList<TraOption> ());
+					TraAnswer currTraAnswer = qaMap.get(q.getId().toString());
+			    
+					if (currTraAnswer == null) {
+						qaMap.put(q.getId().toString(), new TraAnswer());
+						qaMap.get(q.getId().toString()).setQuestion(q);
+						qaMap.get(q.getId().toString()).setSelectedOptions(new ArrayList<TraOption> ());
+						
+						currTraAnswer = qaMap.get(q.getId().toString());
+					}
 					
-					currTraAnswer = qaMap.get(q.getId().toString());
-				}
-				
-				
-				currTraAnswer.getSelectedOptions().add(a);
+					
+					currTraAnswer.getSelectedOptions().add(a);
 
-			});
-			traSession.setTraAnswers(qaMap);
-		
+				});
+				traSession.setTraAnswers(qaMap);
+			
+			}
 		}
+		
 		return traSession; 
 		
 	}	

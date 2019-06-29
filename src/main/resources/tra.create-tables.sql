@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `question` (
   `multi_answer` tinyint(1) NOT NULL DEFAULT '0',
   `explanation` varchar(500) DEFAULT NULL,
   `instruction` varchar(200) DEFAULT NULL,
-  `text` varchar(200) NOT NULL,
+  `text` varchar(500) NOT NULL,
   `sort_order` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `un_q_name` (`name`),
