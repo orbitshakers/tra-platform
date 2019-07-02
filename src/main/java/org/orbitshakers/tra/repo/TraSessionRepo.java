@@ -1,5 +1,6 @@
 package org.orbitshakers.tra.repo;
 
+import java.util.Date;
 import java.util.List;
 
 import org.orbitshakers.tra.entity.TraSessionEntity;
@@ -18,6 +19,11 @@ public interface TraSessionRepo extends JpaRepository<TraSessionEntity, Long> {
 	@Modifying
 	@Query(value="INSERT INTO trasess_quest_traop(session_id, question_id, traoption_id) VALUES (?1, ?2, ?3) ", nativeQuery = true)
 	void addSelectedOption(String sessionId, Long questionId, Long traOptionId) ;
+	
+	@Modifying
+	@Query(value="UPDATE trasession set last_update_time = ?1 WHERE session_id = ?2 ", nativeQuery = true)
+	void updateSessionLastUpdateTime(Date lastUpdateTime, String sessionId) ;
+
 	
 	List<Object[]> getSessionQuestionAnswers(String sessionId);
 }

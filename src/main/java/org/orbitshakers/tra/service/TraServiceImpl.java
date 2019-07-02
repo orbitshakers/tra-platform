@@ -139,7 +139,7 @@ public class TraServiceImpl implements TraService{
 				traSessionRepo.addSelectedOption(traSession.getSessionId(), answer.getQuestion().getId(), aSelectedOption.getId()) ;
 			}
 		}
-		
+		traSessionRepo.updateSessionLastUpdateTime(new Date(), traSession.getSessionId());
 		return getTraSession(traSession.getSessionId());
 	}	
 
