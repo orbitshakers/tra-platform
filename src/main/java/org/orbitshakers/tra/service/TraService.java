@@ -18,6 +18,8 @@ public interface TraService {
 	public TraSession createTraSession();
 	
 	public TraSession saveTraSession(TraSession traSession);
-	public TraSession getTraSession(String sessionId);
 	
+	public TraSession getTraSession(String sessionId);
+
+	public TraSession resetTraSession(String sessionId);
 }

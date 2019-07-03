@@ -143,7 +143,17 @@ public class TraServiceImpl implements TraService{
 		return getTraSession(traSession.getSessionId());
 	}	
 
-
+	@Transactional
+	public TraSession resetTraSession(String sessionId) {
+		TraSession traSession = null;
+		
+		traSessionRepo.deleteSessionAnswers(sessionId);
+		traSessionRepo.updateSessionLastUpdateTime(new Date(), sessionId);
+		traSession = getTraSession(sessionId);
+		
+		return traSession;
+	}
+	
 	public TraSession getTraSession(String sessionId) {
 
 		TraSessionEntity result = traSessionRepo.findBySessionId(sessionId);

@@ -72,5 +72,10 @@ public class TraController {
 		return ResponseEntity.ok(traService.getTraSession(sessionId));
     }
         
-    
+    @PostMapping("/reset-session")
+    public ResponseEntity<TraSession> resetSession(@RequestBody TraSession traSession) {
+    	logger.info("resetSession");
+
+    	return ResponseEntity.ok(traService.resetTraSession(traSession.getSessionId()));
+    }    
 }
